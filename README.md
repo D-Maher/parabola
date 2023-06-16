@@ -1,19 +1,22 @@
 # parabola
 A playground app for learning about Neo4j and Apollo
 
-# Set Up
+## Set Up
  - clone the repo:
     - git clone git@github.com:D-Maher/parabola.git
 
-# Commands:
+## Commands:
  - docker compose up -or- docker compose up neo4j (just to start up the neo4j container)
  - docker compose down 
 
-# Notes:
+## Database GUI
+ - http://localhost:7474/browser/
+
+## Notes:
 Image - the template(instructions) for the container
 Container - the actual environment running 
 
-# Resources:
+## Resources:
  - https://hub.docker.com/_/neo4j/
  - Image we are using on Arch: https://hub.docker.com/layers/library/neo4j/4.3.17-enterprise/images/sha256-5eae67d3e00386c1c1070937843b1d7b4ac0ab8e63505d098d13c48df672286a?context=explore
  - https://neo4j.com/docs/operations-manual/current/introduction/#:~:text=There%20are%20two%20editions%20of,%2C%20clustering%2C%20and%20failover%20capabilities.
