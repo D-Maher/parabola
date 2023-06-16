@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  neo4j:
+    image: neo4j:4.3.17-enterprise
+    ports:
+      # - 'host':'container'
+      - '7474:7474' # Remote interface: exposes neo4j browser // GUI port
+      - '7687:7687' # Bolt: connect to the database and issue queries without going through interface // binary protocol
+    volumes:
+      - neo4j_data:/data
+      - neo4j_plugins:/plugins
+      - neo4j_import:/import
+    environment:
+      NEO4J_AUTH: none
+      NEO4J_ACCEPT_LICENSE_AGREEMENT: 'yes'
+      NEO4JLABS_PLUGINS: '["apoc"]'
+      NEO4J_apoc_import_file_enabled: 'true'
+      NEO4J_metrics_namespaces_enabled: 'true'
+
+volumes:
+  neo4j_data:
+    driver: local
+  neo4j_plugins:
+    driver: local
+  neo4j_import:
+    driver: local
