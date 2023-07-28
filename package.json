@@ -1,0 +1,29 @@
+{
+  "name": "parabola",
+  "version": "1.0.0",
+  "description": "A playground app for learning about Neo4j and Apollo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/D-Maher/parabola.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/D-Maher/parabola/issues"
+  },
+  "homepage": "https://github.com/D-Maher/parabola#readme",
+  "devDependencies": {
+    "@types/node": "^20.4.5",
+    "dotenv": "^16.3.1",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "cypher-query-builder": "^6.0.4",
+    "neo4j-driver": "^5.11.0"
+  }
+}
