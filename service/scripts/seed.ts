@@ -5,21 +5,22 @@ import TestDatabase from "../database/neo4j.database";
 
 dotenv.config();
 
-const abbvieDatabaseName = process.env.NEO4J_DATABASE || "parabola";
+const parabolaDatabaseName = process.env.NEO4J_DATABASE || "parabola";
 
 async function seedDatabase() {
-  const abbvieDatabase = new TestDatabase(abbvieDatabaseName);
+  const abbvieDatabase = new TestDatabase(parabolaDatabaseName);
   try {
-    console.info(`Creating and/or cleaning ${abbvieDatabaseName}`);
+    console.info(`Creating and/or cleaning ${parabolaDatabaseName}`);
     await abbvieDatabase.createDatabase();
-    const filenames = ["neo4j.various-drug.cypher"];
-    console.info(`Seeding ${abbvieDatabaseName}`);
+    // whats a sleeker way to say -> look into the data directory and seed all cypher files
+    const filenames = ["artists.cypher"];
+    console.info(`Seeding ${parabolaDatabaseName}`);
     await abbvieDatabase.seedAll(
       filenames.map(
-        (filename) => path.join(__dirname, "..", "src", "data", filename) // '../src/data/<filename>'
+        (filename) => path.join(__dirname, "..", "data", filename) // '../src/data/<filename>'
       )
     );
-    console.info(`Database '${abbvieDatabaseName}' seeded`);
+    console.info(`Database '${parabolaDatabaseName}' seeded`);
   } finally {
     await abbvieDatabase.close();
   }

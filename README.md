@@ -27,3 +27,11 @@ Container - the actual environment running
     - compose: https://docs.docker.com/compose/compose-file/07-volumes/
  - Neo4j Driver: https://github.com/neo4j/neo4j-javascript-driver
 
+- APOC - lodash for neo4j cypher : https://neo4j.com/labs/apoc/
+- BOLT: https://neo4j.com/docs/bolt/current/bolt/
+      https://neo4j.com/docs/bolt/current/bolt/handshake/
+         From Chat Gpt:
+            When it is mentioned that Bolt is stateful unlike HTTP, it means that Bolt protocol maintains a continuous and persistent connection between the client and the server, allowing them to exchange data in a stateful manner. In contrast, HTTP is stateless, where each request is independent of any previous or future requests.
+
+            Being stateful in Bolt protocol enables the server to maintain information about the client's session or context throughout multiple requests, eliminating the need to resend certain data with each request. This can result in improved performance and reduced overhead
+            Database Transactions: Bolt is commonly used for communication between client applications and databases like Neo4j. In a transaction, multiple queries or operations are performed as part of a single logical unit of work. With Bolt being stateful, the server can maintain the transactional context and keep track of the progress, allowing the client to commit or rollback the transaction without the need to resend all the queries.

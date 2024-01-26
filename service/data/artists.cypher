@@ -1,0 +1,1 @@
+// artists nodes to seed our database

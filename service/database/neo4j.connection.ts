@@ -17,21 +17,24 @@ export class Neo4jConnection {
 
   constructor(
     private uri: string,
-    private username?: string,
-    private password?: string,
+    // private username?: string,
+    // private password?: string,
     private database?: string // do we need this if we are only going to have 1 database (or database version)
   ) {
     // Neo4J Javascript Driver docs: 'https://neo4j.com/docs/javascript-manual/current/client-applications/'
-    this.driver = neo4j.driver(this.uri, this.auth, {
-      maxConnectionLifetime: 3 * 60 * 1000, // 3 minutes
-      // The server expiration is set at 60 minutes
-    });
+
+    // does the driver need this specifically? of not: update this when we have auth
+    // this.driver = neo4j.driver(this.uri, this.auth, {
+      this.driver = neo4j.driver(this.uri, undefined, {
+        maxConnectionLifetime: 3 * 60 * 1000, // 3 minutes
+        // The server expiration is set at 60 minutes
+      });
   }
 
   getInfo() {
     return {
       uri: this.uri,
-      username: this.username,
+      // username: this.username,
       database: this.database,
     };
   }
@@ -57,6 +60,8 @@ export class Neo4jConnection {
     });
   }
 
+  // methods like writeRaw are our functions using functions from the Driver
+  // wrapper we use to interact with neo4j (instead of using session.executeWrite everywhere)
   async writeRaw(cypher: string, params = {}) {
     // Write is only allowed for tests and seeds on Arch search (read only app)
     const session = this.getSession();
@@ -87,7 +92,7 @@ export class Neo4jConnection {
   }
 
   async streamRaw<T extends RecordShape>( // what is this for - not used in Arch Search
-  // streams the data instead of waiting for it to return ?
+    // streams the data instead of waiting for it to return ?
     cypher: string,
     params = {},
     { onNext }: { onNext?: (record: Record<T>) => void } = {}
@@ -121,30 +126,37 @@ export class Neo4jConnection {
     return Neo4jConnection.neo4jInstanceKey(this.uri, this.database);
   }
 
-  private get auth() {
-    if (this.username && this.password) {
-      return neo4j.auth.basic(this.username, this.password);
-    }
-    return undefined;
-  }
+  // private get auth() {
+  //   if (this.username && this.password) {
+  //     return neo4j.auth.basic(this.username, this.password);
+  //   }
+  //   return undefined;
+  // }
 
-  static parabolaNeo4jInstance(databaseName = process.env.NEO4J_DATABASE) {
+  // defines what we need to establish the connection -> specifically for parabola
+  // static parabolaNeo4jInstance(databaseName = process.env.NEO4J_DATABASE) {
+  static parabolaNeo4jInstance(databaseName: string) {
+    // when nothing is defined we pass in line 8 in the seed.ts file (const parabolaDatabaseName)
     return this.connection(
+      // bolt - connection protocol specifically for neo4j
       process.env.NEO4J_URI || "bolt://localhost:7687",
-      process.env.NEO4J_USERNAME,
-      process.env.NEO4J_PASSWORD,
+      // process.env.NEO4J_USERNAME,
+      // process.env.NEO4J_PASSWORD,
       databaseName
     );
   }
 
   private static connection(
     uri: string,
-    username?: string,
-    password?: string,
+    // username?: string,
+    // password?: string,
     database?: string
   ) {
+    // if we have already connected, use that existing connection, otherwise instantiate a new connection
     Neo4jConnection.connectionCache[this.neo4jInstanceKey(uri, database)] ??= // '??=' ==> nullish coalescing assignment operator -> if everything to left of oper is null, then assign it to whats to the right of the operator
-      new Neo4jConnection(uri, username, password, database);
+      // new Neo4jConnection(uri, username, password, database);
+      new Neo4jConnection(uri, database);
+
 
     return Neo4jConnection.connectionCache[
       this.neo4jInstanceKey(uri, database)
