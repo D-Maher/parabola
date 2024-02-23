@@ -40,3 +40,5 @@ Container - the actual environment running
 
             Being stateful in Bolt protocol enables the server to maintain information about the client's session or context throughout multiple requests, eliminating the need to resend certain data with each request. This can result in improved performance and reduced overhead
             Database Transactions: Bolt is commonly used for communication between client applications and databases like Neo4j. In a transaction, multiple queries or operations are performed as part of a single logical unit of work. With Bolt being stateful, the server can maintain the transactional context and keep track of the progress, allowing the client to commit or rollback the transaction without the need to resend all the queries.
+
+- Neo4j `MERGE`: https://neo4j.com/docs/cypher-manual/current/clauses/merge
