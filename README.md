@@ -2,14 +2,19 @@
 A playground app for learning about Neo4j and Apollo
 
 ## Set Up
- - clone the repo:
-    - git clone git@github.com:D-Maher/parabola.git
+   - clone the repo:
+      - `git clone git@github.com:D-Maher/parabola.git`
+   - install dependencies:
+      - `npm install`
+   - spin up the Neo4j container:
+     - `docker compose up neo4j`
+   - visit the Neo4j Browser: http://localhost:7474/browser/
 
 ## Commands:
- - docker compose up -or- docker compose up neo4j (just to start up the neo4j container)
- - docker compose down
+   - Seed the database: `npm run seed`
+   - Shut down the Neo4j container: `docker compose down`
 
-## Database GUI
+## Neo4j Browser
  - http://localhost:7474/browser/
 
 ## Notes:
