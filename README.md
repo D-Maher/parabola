@@ -6,8 +6,8 @@ A playground app for learning about Neo4j and Apollo
     - git clone git@github.com:D-Maher/parabola.git
 
 ## Commands:
- - docker compose up -or- docker compose up neo4j (just to start up the neo4j container)
- - docker compose down 
+ - `docker compose up` -or- `docker compose up neo4j` to start up the neo4j container
+ - `docker compose down` to shut down and remove the container
 
 ## Database GUI
  - http://localhost:7474/browser/
