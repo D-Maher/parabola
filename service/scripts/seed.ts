@@ -13,7 +13,7 @@ async function seedDatabase() {
     console.info(`Creating and/or cleaning ${parabolaDatabaseName}`);
     await abbvieDatabase.createDatabase();
     // whats a sleeker way to say -> look into the data directory and seed all cypher files
-    const filenames = ["artists.cypher", "bands.cypher", "member-of.cypher"];
+    const filenames = ["music.cypher"];
     console.info(`Seeding ${parabolaDatabaseName}`);
     await abbvieDatabase.seedAll(
       filenames.map(
