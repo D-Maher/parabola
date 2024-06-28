@@ -34,7 +34,11 @@ MERGE (rock:Genre { type: 'Rock' })
 MERGE (alt:Genre { type: 'Alternative' })
 
 // Establish :MEMBER_OF relationships between Arist and Band nodes if they are not already established
-MERGE (paul)-[:MEMBER_OF]->(theBeatles)
+MERGE (paul)-[:MEMBER_OF {
+  since: date('1979-07-06'),
+  feelingsAboutJoining: ['Jaded', 'Conflicted', 'Apprehensive'],
+  roles: ['Bass Guitar', 'Vocals', 'Piano']
+}]->(theBeatles)
 MERGE (curt)-[:MEMBER_OF]->(nirvana)
 MERGE (dave)-[:MEMBER_OF]->(nirvana)
 MERGE (dave)-[:MEMBER_OF]->(fooFighters)
